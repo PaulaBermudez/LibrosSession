@@ -1,0 +1,36 @@
+﻿@using LibrosSession.Models
+
+@model List<Libro>
+
+@{
+    ViewBag.Title = "LibrosFavoritos";
+}
+
+<h2>Libros Favoritos</h2>
+
+@if (Session["LIBROS"] != null)
+{
+    <table class="table tab-content">
+        <tr>
+            <th>TÍTULO</th>
+            <th>AUTOR</th>
+            <th></th>
+        </tr>
+
+        @foreach (Libro lib in Model)
+        {
+            <tr>
+                <td>@lib.Titulo</td>
+                <td>@lib.Autor</td>
+                <td>
+                    @Html.ActionLink("Quitar de favoritos", "LibrosFavoritos","Libros", new { id = lib.IdLibro }, null)</td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h1>No hay ningún libro en tu lista de favoritos</h1>
+}
+@Html.ActionLink("Volver a la lista", "ListadoLibros", "Libros")
